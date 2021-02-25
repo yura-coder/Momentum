@@ -9,6 +9,7 @@ const showAmPm = true;
 
 // Show Time
 function showTime() {
+   //let today = new Date(2019, 06, 10, 20, 33, 30),
   let today = new Date(),
     hour = today.getHours(),
     min = today.getMinutes(),
@@ -21,93 +22,94 @@ function showTime() {
   hour = hour % 12 || 12;
 
   // Output Time
-  time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(
-    sec
-  )} ${showAmPm ? amPm : ''}`;
+  time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)} ${showAmPm ? amPm : ''}`;
 
   setTimeout(showTime, 1000);
 }
-
-// Add Zeros
-function addZero(n) {
+//Add Zeros
+function addZero(n){
   return (parseInt(n, 10) < 10 ? '0' : '') + n;
 }
 
-// Set Background and Greeting
+//Set Background and Greeting
 function setBgGreet() {
+  //let today = new Date(2019, 06, 10, 20, 33, 30),
   let today = new Date(),
-    hour = today.getHours();
+  hour = today.getHours();
 
-  if (hour < 12) {
-    // Morning
-    document.body.style.backgroundImage =
-      "url('https://i.ibb.co/7vDLJFb/morning.jpg')";
-    greeting.textContent = 'Good Morning, ';
-  } else if (hour < 18) {
-    // Afternoon
-    document.body.style.backgroundImage =
-      "url('https://i.ibb.co/3mThcXc/afternoon.jpg')";
-    greeting.textContent = 'Good Afternoon, ';
-  } else {
-    // Evening
-    document.body.style.backgroundImage =
-      "url('https://i.ibb.co/924T2Wv/night.jpg')";
-    greeting.textContent = 'Good Evening, ';
-    document.body.style.color = 'white';
-  }
+if (hour < 12) {
+  // Morning 
+  document.body.style.backgroundImage = "url('../momentum/assets/morning.jpg')";
+  greeting.textContent = 'Good Morning'; 
+ } else if(hour < 18) {
+  //Afternoon
+  document.body.style.backgroundImage = "url('../momentum/assets/afternoon.jpg')";
+  greeting.textContent = 'Good Afternoon'; 
+ } else {
+  //Evening
+  document.body.style.backgroundImage = "url('../momentum/assets/night.jpg')";
+  greeting.textContent = 'Good Evenimg'; 
+  document.body.style.color = 'White';
+ }
 }
 
-// Get Name
-function getName() {
-  if (localStorage.getItem('name') === null) {
-    name.textContent = '[Enter Name]';
-  } else {
-    name.textContent = localStorage.getItem('name');
-  }
-}
+//Get Name
+ function getName() {
+   if (localStorage.getItem('name') === null) {
+     name.textContent = '[Enter Name]';
+   } else {
+     name.textContent = localStorage.getItem('name');
+   }
+ }
 
-// Set Name
-function setName(e) {
+ //Set Name
+ function setName(e) {
+   if (e.type === 'keypress') {
+   //Make sure enter is pressed
+   if (e.which == 13 || e.keyCode == 13) {
+     localStorage.setItem('name', e.target.innerText);
+     name.blur();
+   }
+
+   } else {
+     localStorage.setItem('name', e.target.innerText);
+  
+   }
+ }
+
+ //Set Focus
+ function setFocus(e) {
   if (e.type === 'keypress') {
-    // Make sure enter is pressed
-    if (e.which == 13 || e.keyCode == 13) {
-      localStorage.setItem('name', e.target.innerText);
-      name.blur();
-    }
-  } else {
-    localStorage.setItem('name', e.target.innerText);
+  //Make sure enter is pressed
+  if(e.which == 13 || e.keyCode == 13) {
+    localStorage.setItem('focus', e.target.innerText);
+    focus.blur();
   }
-}
 
-// Get Focus
-function getFocus() {
-  if (localStorage.getItem('focus') === null) {
-    focus.textContent = '[Enter Focus]';
-  } else {
-    focus.textContent = localStorage.getItem('focus');
-  }
-}
-
-// Set Focus
-function setFocus(e) {
-  if (e.type === 'keypress') {
-    // Make sure enter is pressed
-    if (e.which == 13 || e.keyCode == 13) {
-      localStorage.setItem('focus', e.target.innerText);
-      focus.blur();
-    }
   } else {
     localStorage.setItem('focus', e.target.innerText);
+ 
   }
 }
 
-name.addEventListener('keypress', setName);
-name.addEventListener('blur', setName);
-focus.addEventListener('keypress', setFocus);
-focus.addEventListener('blur', setFocus);
+ //Get Focus
+ function getFocus() {
+   if (localStorage.getItem('focus') === null) {
+     focus.textContent = '[Enter Focus]';
+   } else {
+     focus.textContent = localStorage.getItem('focus');
+   }
+ }
+
+name.addEventListener('keypress',setName);
+name.addEventListener('blyr',setName);
+focus.addEventListener('keypress',setFocus);
+focus.addEventListener('blyr',setFocus);
+
 
 // Run
 showTime();
 setBgGreet();
 getName();
 getFocus();
+//setName();
